@@ -87,9 +87,29 @@ view: pageviewengagement_events {
     sql: ${TABLE}.user_id ;;
   }
 
-  measure: count {
+  measure: pageviews {
+    type: count_distinct
+    sql: ${properties_visit_id} ;;
+  }
+
+  measure: engaged_time_event_count {
     type: count
     approximate_threshold: 100000
     drill_fields: []
+  }
+
+  measure: engaged_time_seconds {
+    type: number
+    sql: ${engaged_time_event_count}*5 ;;
+  }
+
+  measure: uniques {
+    type: count_distinct
+    sql: ${user_id} ;;
+  }
+
+  measure: sessions {
+    type: count_distinct
+    sql: ${session_id} ;;
   }
 }

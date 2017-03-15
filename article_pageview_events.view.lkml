@@ -218,6 +218,11 @@ view: article_pageview_events {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: type_fia {
+    type: yesno
+    sql: ${properties__client__type}="fia";;
+  }
+
   measure: pageviews {
     type: count
     approximate_threshold: 100000
