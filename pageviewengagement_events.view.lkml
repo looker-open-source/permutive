@@ -103,6 +103,11 @@ view: pageviewengagement_events {
     sql: ${engaged_time_event_count}*5 ;;
   }
 
+  measure: engaged_time_hours {
+    type: number
+    sql: ${engaged_time_event_count}*5/3600 ;;
+  }
+
   measure: uniques {
     type: count_distinct
     sql: ${user_id} ;;
