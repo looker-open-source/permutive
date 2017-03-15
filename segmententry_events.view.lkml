@@ -96,9 +96,10 @@ view: segmententry_events {
     sql: ${TABLE}.user_id ;;
   }
 
-  measure: count {
-    type: count
-    approximate_threshold: 100000
-    drill_fields: [properties__segment_name]
+
+
+  measure: uniques {
+    type: count_distinct
+    sql: ${user_id} ;;
   }
 }
