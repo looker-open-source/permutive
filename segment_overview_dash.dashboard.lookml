@@ -82,6 +82,50 @@
         first_last: first
         num_rows: 0
 
+    - name: pageviews_from_segmented_users
+      title: Pageviews
+      type: single_value
+      model: permutive
+      explore: pageviewengagement_events
+      measures: [pageviewengagement_events.pageviews]
+      listen:
+        date_filter: segmententry_events.time_date
+        segment_name_filter: segmententry_events.properties__segment_name
+      limit: '500'
+      column_limit: '50'
+      query_timezone: America/Los_Angeles
+      custom_color_enabled: true
+      custom_color: "#224c8b"
+      show_single_value_title: true
+      show_comparison: false
+      comparison_type: value
+      comparison_reverse_colors: false
+      show_comparison_label: true
+      stacking: ''
+      show_value_labels: false
+      label_density: 25
+      legend_position: center
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: true
+      limit_displayed_rows: false
+      y_axis_combined: true
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      x_axis_scale: auto
+      y_axis_scale_mode: linear
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      series_types: {}
+      single_value_title: Pageviews
+
     - name: total_segmented_uniques
       title: Segmented Uniques
       type: single_value
