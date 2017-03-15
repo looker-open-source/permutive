@@ -25,7 +25,12 @@ explore: brandliftresponse_events {}
 
 explore: hellobrit_events {}
 
-explore: pageviewengagement_events {}
+explore: pageviewengagement_events {
+  join: segmententry_events {
+    sql_on: ${pageviewengagement_events.segments} = ${segmententry_events.properties__segment_number} ;;
+    relationship: one_to_one
+  }
+}
 
 explore: reaction_events {}
 
