@@ -3,7 +3,8 @@ view: article_pageview_events {
 
   dimension: event_id {
     type: string
-    sql: ${TABLE}.event_id ;;
+    primary_key: yes
+    sql: ${TABLE}.event_id;;
   }
 
   dimension: properties___document__collection {

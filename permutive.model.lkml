@@ -17,7 +17,7 @@ explore: article_pageview_events {
   }
   join: segmententry_events {
     sql_on: ${article_pageview_events.segments} = ${segmententry_events.properties__segment_number} ;;
-    relationship: one_to_one
+    relationship: many_to_many
   }
 }
 
@@ -28,7 +28,7 @@ explore: hellobrit_events {}
 explore: pageviewengagement_events {
   join: segmententry_events {
     sql_on: ${pageviewengagement_events.segments} = ${segmententry_events.properties__segment_number} ;;
-    relationship: one_to_one
+    relationship: many_to_many
   }
 }
 

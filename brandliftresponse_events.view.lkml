@@ -3,6 +3,7 @@ view: brandliftresponse_events {
 
   dimension: event_id {
     type: string
+    primary_key: yes
     sql: ${TABLE}.event_id ;;
   }
 
