@@ -103,4 +103,10 @@ view: segmententry_events {
     type: count_distinct
     sql: ${user_id} ;;
   }
+
+  measure: cumulative_uniques {
+    type: running_total
+    sql: ${uniques} ;;
+    direction:"column"
+  }
 }
