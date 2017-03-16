@@ -106,7 +106,7 @@ view: pageviewengagement_events {
 
   measure: engaged_time_hours {
     type: number
-    sql: ${engaged_time_event_count}*5/3600 ;;
+    sql: round((${engaged_time_event_count}*5)/3600,1) ;;
   }
 
   measure: uniques {
