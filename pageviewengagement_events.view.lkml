@@ -118,4 +118,17 @@ view: pageviewengagement_events {
     type: count_distinct
     sql: ${session_id} ;;
   }
+
+  measure: average_engaged_time_per_session {
+    type: number
+    sql: ${engaged_time_seconds}/(CASE WHEN ${sessions} = 0 THEN NULL ELSE ${sessions} END) ;;
+    value_format_name: decimal_2
+  }
+
+  measure: average_pageviews_per_session {
+    type: number
+    sql: ${pageviews}/(CASE WHEN ${sessions} = 0 THEN NULL ELSE ${sessions} END) ;;
+    value_format_name: decimal_1
+  }
+
 }
