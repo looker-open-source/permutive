@@ -31,10 +31,11 @@ explore: pageviewengagement_events
 {
   label: "Pageview Engagement Events"
   view_label: "Pageview Engagement Events"
-  join: segmententry_events {
-    view_label: "Segment Entry Events"
-    sql_on: ${pageviewengagement_events.segments} = ${segmententry_events.properties__segment_number} ;;
-    relationship: many_to_many
+
+  join: segment_facts {
+    view_label: "Pageview Engagement Events"
+    sql_on: ${pageviewengagement_events.segments} = ${segment_facts.properties_segment_number} ;;
+    relationship: one_to_many
   }
   join: pageviewengagement_session_facts {
     view_label: "Pageview Engagement Session Facts"

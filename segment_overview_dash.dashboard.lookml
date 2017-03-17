@@ -63,7 +63,7 @@
       listen:
         date_filter: segmententry_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
-      sorts: [segmententry_events.uniques desc, segmententry_events.properties__segment_name]
+      sorts: [segmententry_events.uniques desc, segment_facts.segment_name]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -132,7 +132,7 @@
       measures: [pageviewengagement_events.pageviews]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -179,7 +179,7 @@
       measures: [pageviewengagement_events.engaged_time_hours]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -220,12 +220,12 @@
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [segmententry_events.properties__segment_name]
+      dimensions: [segment_facts.segment_name]
       measures: [pageviewengagement_events.uniques, pageviewengagement_events.sessions,
         pageviewengagement_events.pageviews]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       sorts: [pageviewengagement_events.uniques desc]
       limit: '500'
       column_limit: '50'
@@ -275,7 +275,7 @@
       listen:
         date_filter: segmententry_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
-      sorts: [segmententry_events.time_date, segmententry_events.uniques desc 0, segmententry_events.properties__segment_name]
+      sorts: [segmententry_events.time_date, segmententry_events.uniques desc 0, segment_facts.segment_name]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -351,7 +351,7 @@
       listen:
         date_filter: segmententry_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
-      sorts: [segmententry_events.time_date, segmententry_events.properties__segment_name 0]
+      sorts: [segmententry_events.time_date, segment_facts.segment_name 0]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -395,11 +395,11 @@
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [segmententry_events.properties__segment_name]
+      dimensions: [segment_facts.segment_name]
       measures: [pageviewengagement_events.average_engaged_time_per_session]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       filters:
         pageviewengagement_events.segments: NOT NULL
       sorts: [pageviewengagement_events.average_engaged_time_per_session desc]
@@ -440,12 +440,12 @@
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [pageviewengagement_session_facts.engaged_time_tier, segmententry_events.properties__segment_name]
+      dimensions: [pageviewengagement_session_facts.engaged_time_tier, segment_facts.segment_name]
       pivots: [pageviewengagement_session_facts.engaged_time_tier]
       measures: [pageviewengagement_events.sessions]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       filters:
         pageviewengagement_events.segments: NOT NULL
         pageviewengagement_session_facts.engaged_time_tier: "-Undefined"
@@ -491,17 +491,17 @@
       type: looker_column
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [pageviewengagement_session_facts.engaged_time_tier, segmententry_events.properties__segment_name]
-      pivots: [segmententry_events.properties__segment_name]
+      dimensions: [pageviewengagement_session_facts.engaged_time_tier, segment_facts.segment_name]
+      pivots: [segment_facts.segment_name]
       measures: [pageviewengagement_events.sessions]
       filters:
         pageviewengagement_events.segments: NOT NULL
         pageviewengagement_session_facts.engaged_time_tier: "-Undefined"
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       sorts: [pageviewengagement_session_facts.engaged_time_tier, pageviewengagement_events.sessions desc 0,
-        segmententry_events.properties__segment_name]
+        segment_facts.segment_name]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -547,11 +547,11 @@
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [segmententry_events.properties__segment_name]
+      dimensions: [segment_facts.segment_name]
       measures: [pageviewengagement_events.average_pageviews_per_session]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       sorts: [pageviewengagement_events.average_pageviews_per_session desc]
       limit: '500'
       column_limit: '50'
@@ -586,14 +586,14 @@
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [segmententry_events.properties__segment_name, pageviewengagement_session_facts.pageviews_tier]
+      dimensions: [segment_facts.segment_name, pageviewengagement_session_facts.pageviews_tier]
       pivots: [pageviewengagement_session_facts.pageviews_tier]
       measures: [pageviewengagement_events.sessions]
       filters:
         pageviewengagement_session_facts.pageviews_tier: "-Undefined"
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       sorts: [pageviewengagement_events.sessions desc 0, pageviewengagement_session_facts.pageviews_tier]
       limit: '500'
       column_limit: '50'
@@ -627,12 +627,12 @@
       type: looker_column
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [segmententry_events.properties__segment_name, pageviewengagement_session_facts.pageviews_tier]
-      pivots: [segmententry_events.properties__segment_name]
+      dimensions: [segment_facts.segment_name, pageviewengagement_session_facts.pageviews_tier]
+      pivots: [segment_facts.segment_name]
       measures: [pageviewengagement_events.sessions]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       filters:
         pageviewengagement_session_facts.pageviews_tier: "-Undefined"
       sorts: [pageviewengagement_session_facts.pageviews_tier]
@@ -722,14 +722,14 @@
       type: looker_line
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [pageviewengagement_events.time_date, segmententry_events.properties__segment_name]
-      pivots: [segmententry_events.properties__segment_name]
+      dimensions: [pageviewengagement_events.time_date, segment_facts.segment_name]
+      pivots: [segment_facts.segment_name]
       fill_fields: [pageviewengagement_events.time_date]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       measures: [pageviewengagement_events.uniques]
-      sorts: [pageviewengagement_events.time_date, segmententry_events.properties__segment_name 0]
+      sorts: [pageviewengagement_events.time_date, segment_facts.segment_name 0]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -769,14 +769,14 @@
       type: looker_line
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [pageviewengagement_events.time_date, segmententry_events.properties__segment_name]
-      pivots: [segmententry_events.properties__segment_name]
+      dimensions: [pageviewengagement_events.time_date, segment_facts.segment_name]
+      pivots: [segment_facts.segment_name]
       fill_fields: [pageviewengagement_events.time_date]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       measures: [pageviewengagement_events.pageviews]
-      sorts: [pageviewengagement_events.time_date, segmententry_events.properties__segment_name 0]
+      sorts: [pageviewengagement_events.time_date, segment_facts.segment_name 0]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -816,14 +816,14 @@
       type: looker_line
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [pageviewengagement_events.time_date, segmententry_events.properties__segment_name]
-      pivots: [segmententry_events.properties__segment_name]
+      dimensions: [pageviewengagement_events.time_date, segment_facts.segment_name]
+      pivots: [segment_facts.segment_name]
       fill_fields: [pageviewengagement_events.time_date]
       listen:
         date_filter: pageviewengagement_events.time_date
-        segment_name_filter: segmententry_events.properties__segment_name
+        segment_name_filter: segment_facts.segment_name
       measures: [pageviewengagement_events.sessions]
-      sorts: [pageviewengagement_events.time_date, segmententry_events.properties__segment_name 0]
+      sorts: [pageviewengagement_events.time_date, segment_facts.segment_name 0]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
