@@ -29,6 +29,12 @@
   - elements: [cumulative_segment_growth]
     height: 300
 
+  - elements: [overlap]
+    height: 100
+
+  - elements: [overlap_table]
+    height: 300
+
   - elements: [new_uniques_in_segment_graph, Cumulative_Uniques, Totals_Overview]
     height: 300
 
@@ -855,3 +861,34 @@
     - name: time_series
       type: text
       title_text: Time Series
+    - name: overlap
+      type: text
+      title_text: Segment Overlap
+
+    - name: overlap_table
+      title: Segment Overlap by Uniques
+      type: table
+      model: permutive
+      explore: segment_overlap
+      dimensions: [segment_overlap.segment_name_1, segment_overlap.segment_name_2]
+      measures: [segment_overlap.uniques]
+      listen:
+        segment_name_filter: segment_overlap.segment_name_1
+      sorts: [segment_overlap.uniques desc]
+      limit: '500'
+      column_limit: '50'
+      query_timezone: America/Los_Angeles
+      show_view_names: false
+      show_row_numbers: true
+      truncate_column_names: false
+      hide_totals: false
+      hide_row_totals: false
+      table_theme: gray
+      limit_displayed_rows: false
+      enable_conditional_formatting: true
+      conditional_formatting_ignored_fields: []
+      conditional_formatting_include_totals: false
+      conditional_formatting_include_nulls: false
+      conditional_formatting: [{type: low to high, value: !!null '', background_color: !!null '',
+          font_color: !!null '', palette: {name: Red to Yellow to Green, colors: ["#F36254",
+              "#FCF758", "#4FBC89"]}, bold: false, italic: false, strikethrough: false}]

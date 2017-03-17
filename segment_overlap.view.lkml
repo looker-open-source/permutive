@@ -31,6 +31,7 @@ view: segment_overlap {
             )
             b on
               a.user_id = b.user_id
+            where a.segment_name <> b.segment_name
        ;;
   }
 
