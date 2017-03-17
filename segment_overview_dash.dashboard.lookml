@@ -51,6 +51,11 @@
       field: segmententry_events.properties__segment_name
       default_value: 'Everyone'
 
+    - name: date_group
+      type: field_filter
+      explore: pageviewengagement_events
+      field: pageviewengagement_events.date_group
+      default_value: 'Date'
 
   elements:
     - name: total_segmented_uniques
@@ -722,14 +727,15 @@
       type: looker_line
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [pageviewengagement_events.time_date, segment_facts.segment_name]
+      dimensions: [pageviewengagement_events.dynamic_date_group, segment_facts.segment_name]
       pivots: [segment_facts.segment_name]
-      fill_fields: [pageviewengagement_events.time_date]
+#       fill_fields: [pageviewengagement_events.dynamic_date_group]
       listen:
         date_filter: pageviewengagement_events.time_date
         segment_name_filter: segment_facts.segment_name
+        date_group: pageviewengagement_events.date_group
       measures: [pageviewengagement_events.uniques]
-      sorts: [pageviewengagement_events.time_date, segment_facts.segment_name 0]
+      sorts: [ageviewengagement_events.dynamic_date_group, segment_facts.segment_name 0]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -769,14 +775,15 @@
       type: looker_line
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [pageviewengagement_events.time_date, segment_facts.segment_name]
+      dimensions: [pageviewengagement_events.dynamic_date_group, segment_facts.segment_name]
       pivots: [segment_facts.segment_name]
-      fill_fields: [pageviewengagement_events.time_date]
+#       fill_fields: [pageviewengagement_events.dynamic_date_group]
       listen:
         date_filter: pageviewengagement_events.time_date
         segment_name_filter: segment_facts.segment_name
+        date_group: pageviewengagement_events.date_group
       measures: [pageviewengagement_events.pageviews]
-      sorts: [pageviewengagement_events.time_date, segment_facts.segment_name 0]
+      sorts: [pageviewengagement_events.dynamic_date_group, segment_facts.segment_name 0]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -816,14 +823,15 @@
       type: looker_line
       model: permutive
       explore: pageviewengagement_events
-      dimensions: [pageviewengagement_events.time_date, segment_facts.segment_name]
+      dimensions: [pageviewengagement_events.dynamic_date_group, segment_facts.segment_name]
       pivots: [segment_facts.segment_name]
-      fill_fields: [pageviewengagement_events.time_date]
+#       fill_fields: [pageviewengagement_events.dynamic_date_group]
       listen:
         date_filter: pageviewengagement_events.time_date
         segment_name_filter: segment_facts.segment_name
+        date_group: pageviewengagement_events.date_group
       measures: [pageviewengagement_events.sessions]
-      sorts: [pageviewengagement_events.time_date, segment_facts.segment_name 0]
+      sorts: [pageviewengagement_events.dynamic_date_group, segment_facts.segment_name 0]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles

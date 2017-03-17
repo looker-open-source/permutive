@@ -27,6 +27,7 @@ explore: pageviewengagement_events
   }
 }
 explore: article_pageview_events {
+
   join: pageviewengagement_events {
     view_label: "Pageview Engagement Events"
     sql_on: ${article_pageview_events.properties_visit_id} = ${pageviewengagement_events.properties_visit_id};;

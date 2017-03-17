@@ -79,9 +79,23 @@ view: pageviewengagement_events {
       week,
       month,
       quarter,
-      year
+      year,
+      hour
     ]
     sql: ${TABLE}.time ;;
+  }
+
+  filter: date_group {
+    suggestions: ["Date", "Week", "Month", "Hour"]
+  }
+
+  dimension: dynamic_date_group {
+    sql:  CASE
+        WHEN {% parameter date_group %} = 'Date' THEN ${time_date}
+        WHEN {% parameter date_group %} = 'Week' THEN ${time_week}
+        WHEN {% parameter date_group %} = 'Month' THEN ${time_month}
+        WHEN {% parameter date_group %} = 'Hour' THEN ${time_hour}
+        END ;;
   }
 
   dimension: user_id {
