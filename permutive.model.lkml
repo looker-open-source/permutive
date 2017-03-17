@@ -11,11 +11,13 @@ include: "*.dashboard"
 
 explore: article_pageview_events {
   join: pageviewengagement_events {
+    view_label: "Pageview Engagement Events"
     sql_on: ${article_pageview_events.properties_visit_id} = ${pageviewengagement_events.properties_visit_id};;
     relationship: one_to_many
 #     type: inner
   }
   join: segmententry_events {
+    view_label: "Segment Entry Events"
     sql_on: ${article_pageview_events.segments} = ${segmententry_events.properties__segment_number} ;;
     relationship: many_to_many
   }
@@ -48,7 +50,10 @@ explore:  segment_overlap {}
 
 explore: reaction_events {}
 
-explore: segmententry_events {}
+explore: segmententry_events {
+  label: "Segment Entry Events"
+  view_label: "Segment Entry Events"
+}
 
 explore: segmentexit_events {}
 

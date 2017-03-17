@@ -224,7 +224,7 @@
       measures: [pageviewengagement_events.uniques, pageviewengagement_events.sessions,
         pageviewengagement_events.pageviews]
       listen:
-        date_filter: segmententry_events.time_date
+        date_filter: pageviewengagement_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
       sorts: [pageviewengagement_events.uniques desc]
       limit: '500'
@@ -398,7 +398,7 @@
       dimensions: [segmententry_events.properties__segment_name]
       measures: [pageviewengagement_events.average_engaged_time_per_session]
       listen:
-        date_filter: segmententry_events.time_date
+        date_filter: pageviewengagement_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
       filters:
         pageviewengagement_events.segments: NOT NULL
@@ -444,7 +444,7 @@
       pivots: [pageviewengagement_session_facts.engaged_time_tier]
       measures: [pageviewengagement_events.sessions]
       listen:
-        date_filter: segmententry_events.time_date
+        date_filter: pageviewengagement_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
       filters:
         pageviewengagement_events.segments: NOT NULL
@@ -498,7 +498,7 @@
         pageviewengagement_events.segments: NOT NULL
         pageviewengagement_session_facts.engaged_time_tier: "-Undefined"
       listen:
-        date_filter: segmententry_events.time_date
+        date_filter: pageviewengagement_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
       sorts: [pageviewengagement_session_facts.engaged_time_tier, pageviewengagement_events.sessions desc 0,
         segmententry_events.properties__segment_name]
@@ -550,7 +550,7 @@
       dimensions: [segmententry_events.properties__segment_name]
       measures: [pageviewengagement_events.average_pageviews_per_session]
       listen:
-        date_filter: segmententry_events.time_date
+        date_filter: pageviewengagement_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
       sorts: [pageviewengagement_events.average_pageviews_per_session desc]
       limit: '500'
@@ -592,7 +592,7 @@
       filters:
         pageviewengagement_session_facts.pageviews_tier: "-Undefined"
       listen:
-        date_filter: segmententry_events.time_date
+        date_filter: pageviewengagement_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
       sorts: [pageviewengagement_events.sessions desc 0, pageviewengagement_session_facts.pageviews_tier]
       limit: '500'
@@ -631,7 +631,7 @@
       pivots: [segmententry_events.properties__segment_name]
       measures: [pageviewengagement_events.sessions]
       listen:
-        date_filter: segmententry_events.time_date
+        date_filter: pageviewengagement_events.time_date
         segment_name_filter: segmententry_events.properties__segment_name
       filters:
         pageviewengagement_session_facts.pageviews_tier: "-Undefined"

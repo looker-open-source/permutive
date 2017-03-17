@@ -70,6 +70,7 @@ view: pageviewengagement_events {
   }
 
   dimension_group: time {
+    label: "Event"
     type: time
     timeframes: [
       raw,
