@@ -49,7 +49,7 @@
       type: field_filter
       explore: segmententry_events
       field: segmententry_events.properties__segment_name
-      default_value: 'Everyone'
+#       default_value: 'Everyone'
 
     - name: date_group
       type: field_filter

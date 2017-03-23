@@ -1,5 +1,5 @@
 view: article_pageview_events {
-  sql_table_name: zeitgeist.articlepageview_events ;;
+  sql_table_name: burda_forward.pageview_events ;;
 
   dimension: event_id {
     type: string

@@ -1,4 +1,4 @@
-connection: "permutive"
+connection: "permutiveburda"
 
 # include all the views
 include: "*.view"
@@ -51,3 +51,18 @@ explore: segmententry_events {
 explore:  segment_overlap {}
 
 explore: segmentexit_events {}
+
+explore: rtabid_events {
+  label: "RTA Bid Events"
+  view_label: "RTA Bid Events"
+  always_filter: {
+    filters: {
+      field: partition_date
+      value: "7 days"
+    }
+  }
+  join: advertiser_facts {
+    sql_on: ${rtabid_events.properties_advertiser} = ${advertiser_facts.advertiser} ;;
+    relationship: many_to_one
+  }
+}

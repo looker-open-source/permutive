@@ -1,5 +1,5 @@
 view: segmententry_events {
-  sql_table_name: zeitgeist.segmententry_events ;;
+  sql_table_name: burda_forward.segmententry_events ;;
 
   dimension: event_id {
     type: string
