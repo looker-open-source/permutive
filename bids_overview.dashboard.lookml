@@ -21,6 +21,16 @@
     type: date_filter
     default_value: '7 days'
 
+  - name: date_group
+    type: field_filter
+    explore: rtabid_events
+    field: rtabid_events.date_group
+    default_value: 'Hour'
+
+  - name: format
+    type: field_filter
+    explore: rtabid_events
+    field: rtabid_events.properties__format
 
   elements:
     - name: total_bids
@@ -31,6 +41,7 @@
       measures: [rtabid_events.total_bids]
       listen:
         date_filter: rtabid_events.partition_date
+        format: rtabid_events.properties__format
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -80,6 +91,7 @@
       measures: [rtabid_events.average_price]
       listen:
         date_filter: rtabid_events.partition_date
+        format: rtabid_events.properties__format
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -126,13 +138,14 @@
       type: looker_area
       model: permutive
       explore: rtabid_events
-      dimensions: [rtabid_events.event_hour, rtabid_events.properties__format]
+      dimensions: [rtabid_events.dynamic_date_group, rtabid_events.properties__format]
       pivots: [rtabid_events.properties__format]
-      fill_fields: [rtabid_events.event_hour]
       measures: [rtabid_events.total_bids]
       listen:
         date_filter: rtabid_events.partition_date
-      sorts: [rtabid_events.event_hour desc, rtabid_events.properties__format]
+        format: rtabid_events.properties__format
+        date_group: rtabid_events.date_group
+      sorts: [rtabid_events.dynamic_date_group desc, rtabid_events.properties__format]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -175,13 +188,14 @@
       type: looker_area
       model: permutive
       explore: rtabid_events
-      dimensions: [rtabid_events.event_hour, rtabid_events.properties__format]
+      dimensions: [rtabid_events.dynamic_date_group, rtabid_events.properties__format]
       pivots: [rtabid_events.properties__format]
-      fill_fields: [rtabid_events.event_hour]
       measures: [rtabid_events.bid_volume]
       listen:
         date_filter: rtabid_events.partition_date
-      sorts: [rtabid_events.event_hour desc, rtabid_events.properties__format]
+        format: rtabid_events.properties__format
+        date_group: rtabid_events.date_group
+      sorts: [rtabid_events.dynamic_date_group desc, rtabid_events.properties__format]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -224,13 +238,14 @@
       type: looker_line
       model: permutive
       explore: rtabid_events
-      dimensions: [rtabid_events.event_hour, rtabid_events.properties__format]
+      dimensions: [rtabid_events.dynamic_date_group, rtabid_events.properties__format]
       pivots: [rtabid_events.properties__format]
-      fill_fields: [rtabid_events.event_hour]
       measures: [rtabid_events.average_price]
       listen:
         date_filter: rtabid_events.partition_date
-      sorts: [rtabid_events.event_hour desc, rtabid_events.properties__format]
+        format: rtabid_events.properties__format
+        date_group: rtabid_events.date_group
+      sorts: [rtabid_events.dynamic_date_group desc, rtabid_events.properties__format]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -276,6 +291,7 @@
       measures: [rtabid_events.bid_volume]
       listen:
         date_filter: rtabid_events.partition_date
+        format: rtabid_events.properties__format
       limit: '10'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -324,15 +340,16 @@
       type: looker_line
       model: permutive
       explore: rtabid_events
-      dimensions: [rtabid_events.properties_advertiser, rtabid_events.event_hour]
+      dimensions: [rtabid_events.properties_advertiser, rtabid_events.dynamic_date_group]
       pivots: [rtabid_events.properties_advertiser]
-      fill_fields: [rtabid_events.event_hour]
       measures: [rtabid_events.average_price]
       filters:
         advertiser_facts.advertiser_rank: "<=10"
       listen:
         date_filter: rtabid_events.partition_date
-      sorts: [rtabid_events.event_hour desc, rtabid_events.properties_advertiser]
+        format: rtabid_events.properties__format
+        date_group: rtabid_events.date_group
+      sorts: [rtabid_events.dynamic_date_group desc, rtabid_events.properties_advertiser]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -376,6 +393,7 @@
       measures: [rtabid_events.total_bids, rtabid_events.average_price]
       listen:
         date_filter: rtabid_events.partition_date
+        format: rtabid_events.properties__format
       sorts: [rtabid_events.total_bids desc]
       limit: '10'
       column_limit: '50'

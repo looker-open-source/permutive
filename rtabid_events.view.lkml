@@ -86,6 +86,18 @@ view: rtabid_events {
     sql: ${TABLE}.time ;;
   }
 
+  filter: date_group {
+    suggestions: ["Date", "Week", "Month", "Hour"]
+  }
+
+  dimension: dynamic_date_group {
+    sql:  CASE
+        WHEN {% parameter date_group %} = 'Date' THEN ${event_date}
+        WHEN {% parameter date_group %} = 'Week' THEN ${event_week}
+        WHEN {% parameter date_group %} = 'Month' THEN ${event_month}
+        WHEN {% parameter date_group %} = 'Hour' THEN ${event_hour}
+        END ;;
+  }
   dimension: user_id {
     type: string
     sql: ${TABLE}.user_id ;;
@@ -100,7 +112,7 @@ view: rtabid_events {
   measure: average_price {
     type: average
     sql: ${properties_price} ;;
-    value_format_name: usd
+    value_format_name: decimal_2
   }
 
   measure: bid_volume {
