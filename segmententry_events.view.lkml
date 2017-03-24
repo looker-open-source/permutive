@@ -71,6 +71,7 @@ view: segmententry_events {
   dimension: segments {
     type: number
     sql: ${TABLE}.segments ;;
+    hidden: yes
     fanout_on: "segments"
   }
 

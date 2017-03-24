@@ -30,6 +30,7 @@ explore: pageviewengagement_events
     sql_on: ${segments.segments} = ${segment_facts.properties_segment_number} ;;
     relationship: one_to_many
   }
+
   join: pageviewengagement_session_facts {
     view_label: "Sessions"
     sql_on: ${pageviewengagement_events.session_id} = ${pageviewengagement_session_facts.session_id} and
@@ -94,9 +95,15 @@ explore: article_pageview_events {
     relationship: one_to_many
 #     type: inner
   }
-  join: segmententry_events {
-    view_label: "Segment Entry Events"
-    sql_on: ${article_pageview_events.segments} = ${segmententry_events.properties__segment_number} ;;
-    relationship: many_to_many
+
+  join: segments {
+    sql: LEFT JOIN UNNEST(${pageviewengagement_events.segments}) as segments ;;
+    relationship: one_to_many
+  }
+
+  join: segment_facts {
+    view_label: "Pageview Engagement Events"
+    sql_on: ${segments.segments} = ${segment_facts.properties_segment_number} ;;
+    relationship: one_to_many
   }
 }
