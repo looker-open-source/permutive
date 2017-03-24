@@ -5,9 +5,11 @@ view: pageviewengagement_session_facts {
           segments,
           count(distinct properties.visit_id) as pageviews,
           SUM(properties.engaged_time) AS engaged_time
-        FROM
-          pageviewengagement_events
+        FROM burda_forward.pageviewengagement_events as pageviewengagement_events
+        LEFT JOIN UNNEST(pageviewengagement_events.segments) as segments
         WHERE segments is not null
+        AND
+        {% condition pageviewengagement_events.partition_date %} _PARTITIONTIME {% endcondition %}
         GROUP BY
           session_id,
           segments

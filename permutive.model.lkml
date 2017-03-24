@@ -13,16 +13,27 @@ explore: pageviewengagement_events
 {
   label: "Pageview Engagement Events"
   view_label: "Pageview Engagement Events"
+  always_filter: {
+    filters: {
+      field: pageviewengagement_events.partition_date
+      value: "7 Days"
+    }
+  }
+
+  join: segments {
+    sql: LEFT JOIN UNNEST(${pageviewengagement_events.segments}) as segments ;;
+    relationship: one_to_many
+  }
 
   join: segment_facts {
     view_label: "Pageview Engagement Events"
-    sql_on: ${pageviewengagement_events.segments} = ${segment_facts.properties_segment_number} ;;
+    sql_on: ${segments.segments} = ${segment_facts.properties_segment_number} ;;
     relationship: one_to_many
   }
   join: pageviewengagement_session_facts {
     view_label: "Pageview Engagement Session Facts"
     sql_on: ${pageviewengagement_events.session_id} = ${pageviewengagement_session_facts.session_id} and
-      ${pageviewengagement_events.segments} = ${pageviewengagement_session_facts.segments};;
+      ${segments.segments} = ${pageviewengagement_session_facts.segments};;
     relationship: many_to_one
   }
 }
@@ -48,7 +59,15 @@ explore: segmententry_events {
   view_label: "Segment Entry Events"
 }
 
-explore:  segment_overlap {}
+explore:  segment_overlap {
+  always_filter: {
+    filters: {
+      field: date_filter
+      value: "7 days"
+    }
+  }
+
+  }
 
 explore: segmentexit_events {}
 

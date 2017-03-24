@@ -99,7 +99,6 @@ view: segmentexit_events {
 
   measure: count {
     type: count
-    approximate_threshold: 100000
     drill_fields: [properties__segment_name]
   }
 }

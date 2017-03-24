@@ -5,7 +5,9 @@ view: segment_facts {
       properties.segment_name as name
       FROM
       segmententry_events
-      where properties.segment_number is not null
+      where
+      {% condition pageviewengagement_events.partition_date %} _PARTITIONTIME {% endcondition %}
+      and properties.segment_number is not null
       group by 1,2
        ;;
   }

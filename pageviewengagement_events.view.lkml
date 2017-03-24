@@ -1,10 +1,15 @@
 view: pageviewengagement_events {
-  sql_table_name: burda_forward.pageviewengagement_events ;;
+  sql_table_name: burda_forward.pageviewengagement_events;;
 
   dimension: event_id {
     type: string
     primary_key: yes
     sql: ${TABLE}.event_id ;;
+  }
+
+  dimension: partition_date {
+    type:  date
+    sql: ${TABLE}._PARTITIONTIME ;;
   }
 
   dimension: properties__client__domain {
@@ -91,7 +96,7 @@ view: pageviewengagement_events {
 
   dimension: dynamic_date_group {
     sql:  CASE
-        WHEN {% parameter date_group %} = 'Date' THEN ${time_date}
+        WHEN {% parameter date_group %} = 'Date' THEN cast(${time_date} as string)
         WHEN {% parameter date_group %} = 'Week' THEN ${time_week}
         WHEN {% parameter date_group %} = 'Month' THEN ${time_month}
         WHEN {% parameter date_group %} = 'Hour' THEN ${time_hour}
@@ -110,7 +115,6 @@ view: pageviewengagement_events {
 
   measure: engaged_time_event_count {
     type: count
-    approximate_threshold: 100000
     drill_fields: []
   }
 

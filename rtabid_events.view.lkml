@@ -92,7 +92,7 @@ view: rtabid_events {
 
   dimension: dynamic_date_group {
     sql:  CASE
-        WHEN {% parameter date_group %} = 'Date' THEN ${event_date}
+        WHEN {% parameter date_group %} = 'Date' THEN cast(${event_date} as string)
         WHEN {% parameter date_group %} = 'Week' THEN ${event_week}
         WHEN {% parameter date_group %} = 'Month' THEN ${event_month}
         WHEN {% parameter date_group %} = 'Hour' THEN ${event_hour}
@@ -105,7 +105,6 @@ view: rtabid_events {
 
   measure: total_bids {
     type: count
-    approximate_threshold: 100000
     drill_fields: []
   }
 
