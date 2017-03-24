@@ -7,6 +7,11 @@ view: segmententry_events {
     sql: ${TABLE}.event_id ;;
   }
 
+  dimension: partition_date {
+    type: date
+    sql:  ${TABLE}._PARTITIONTIME ;;
+  }
+
   dimension: properties__client__domain {
     type: string
     sql: ${TABLE}.properties.client.domain ;;
@@ -54,6 +59,7 @@ view: segmententry_events {
 
   dimension: properties__segment_name {
     type: string
+    view_label: "Segments"
     sql: ${TABLE}.properties.segment_name ;;
   }
 

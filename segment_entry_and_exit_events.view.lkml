@@ -1,8 +1,25 @@
 view: segment_entry_and_exit_events {
   derived_table: {
-    sql: select * from
-      (select *, "entry" as event_type from segmententry_events where ({% condition event_date %} time {% endcondition %})),
-      (select *, "exit" as event_type from segmentexit_events where ({% condition event_date %} time {% endcondition %}) )
+    sql:SELECT * FROM
+      (SELECT
+        time, session_id, user_id, properties.segment_name as segment_name, segments  AS segments_segments, "entry" as event_type
+      FROM burda_forward.segmententry_events  AS segmententry_events
+      LEFT JOIN UNNEST(segmententry_events.segments) as segments
+
+      WHERE
+        {% condition partition_date %} _PARTITIONTIME {% endcondition %}
+        )
+
+      UNION ALL
+
+      (SELECT
+        time, session_id, user_id, properties.segment_name as segment_name, segments  AS segments_segments, "exit" as event_type
+      FROM burda_forward.segmentexit_events  AS segmentexit_events
+      LEFT JOIN UNNEST(segmentexit_events.segments) as segments
+
+      WHERE
+        {% condition partition_date %} _PARTITIONTIME {% endcondition %}
+        )
        ;;
   }
 
@@ -11,19 +28,14 @@ view: segment_entry_and_exit_events {
     sql: ${TABLE}.time ;;
   }
 
-  dimension: event_id {
-    type: string
-    sql: ${TABLE}.event_id ;;
+  filter: partition_date {
+    type: date
   }
+
 
   dimension: user_id {
     type: string
     sql: ${TABLE}.user_id ;;
-  }
-
-  dimension: source_id {
-    type: string
-    sql: ${TABLE}.source_id ;;
   }
 
   dimension: session_id {
@@ -31,63 +43,14 @@ view: segment_entry_and_exit_events {
     sql: ${TABLE}.session_id ;;
   }
 
-  dimension: properties_segment_id {
-    type: string
-    sql: ${TABLE}.properties_segment_id ;;
-  }
-
   dimension: properties_segment_name {
     type: string
-    sql: ${TABLE}.properties.segment_name ;;
-  }
-
-  dimension: properties_client_domain {
-    type: string
-    sql: ${TABLE}.properties_client_domain ;;
-  }
-
-  dimension: properties_client_title {
-    type: string
-    sql: ${TABLE}.properties_client_title ;;
-  }
-
-  dimension: properties_client_url {
-    type: string
-    sql: ${TABLE}.properties_client_url ;;
-  }
-
-  dimension: properties_client_referrer {
-    type: string
-    sql: ${TABLE}.properties_client_referrer ;;
-  }
-
-  dimension: properties_client_user_agent {
-    type: string
-    sql: ${TABLE}.properties_client_user_agent ;;
-  }
-
-  dimension: properties_client_type {
-    type: string
-    sql: ${TABLE}.properties_client_type ;;
-  }
-
-  dimension: properties_segment_code {
-    type: string
-    sql: ${TABLE}.properties_segment_code ;;
-  }
-
-  dimension: properties_custom_id {
-    type: string
-    sql: ${TABLE}.properties_custom_id ;;
-  }
-
-  dimension: properties_segment_number {
-    type: number
-    sql: ${TABLE}.properties_segment_number ;;
+    sql: ${TABLE}.segment_name ;;
   }
 
   dimension: segments {
     type: number
+    label: "Segment Number"
     sql: ${TABLE}.segments ;;
   }
 
@@ -125,26 +88,4 @@ view: segment_entry_and_exit_events {
     sql: ${segment_growth_uniques} ;;
   }
 
-  set: detail {
-    fields: [
-      event_time,
-      event_id,
-      user_id,
-      source_id,
-      session_id,
-      properties_segment_id,
-      properties_segment_name,
-      properties_client_domain,
-      properties_client_title,
-      properties_client_url,
-      properties_client_referrer,
-      properties_client_user_agent,
-      properties_client_type,
-      properties_segment_code,
-      properties_custom_id,
-      properties_segment_number,
-      segments,
-      event_type
-    ]
-  }
 }

@@ -2,17 +2,17 @@ view: segment_overlap {
   derived_table: {
     sql:
       select
-            a.properties.segment_name as segment_name_1
-            , a.properties.segment_number as segment_number_1
-            , b.properties.segment_name as segment_name_2
-            , b.properties.segment_number as segment_number_2
+            a.properties_segment_name as segment_name_1
+            , a.properties_segment_number as segment_number_1
+            , b.properties_segment_name as segment_name_2
+            , b.properties_segment_number as segment_number_2
             , a.user_id as user_id
           from
             (
               select
                 user_id
-                , properties.segment_name
-                , properties.segment_number
+                , properties.segment_name as properties_segment_name
+                , properties.segment_number as properties_segment_number
               from
                 segmententry_events
                 where
@@ -27,8 +27,8 @@ view: segment_overlap {
             inner join (
               select
                 user_id
-                , properties.segment_name
-                , properties.segment_number
+                , properties.segment_name as properties_segment_name
+                , properties.segment_number as properties_segment_number
               from
                segmententry_events
               where
@@ -41,7 +41,7 @@ view: segment_overlap {
             )
             b on
               a.user_id = b.user_id
-            where a.segment_name <> b.segment_name
+            where a.properties_segment_name <> b.properties_segment_name
        ;;
   }
 

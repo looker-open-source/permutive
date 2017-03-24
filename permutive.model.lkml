@@ -37,26 +37,29 @@ explore: pageviewengagement_events
     relationship: many_to_one
   }
 }
-explore: article_pageview_events {
 
-  join: pageviewengagement_events {
-    view_label: "Pageview Engagement Events"
-    sql_on: ${article_pageview_events.properties_visit_id} = ${pageviewengagement_events.properties_visit_id};;
-    relationship: one_to_many
-#     type: inner
-  }
-  join: segmententry_events {
-    view_label: "Segment Entry Events"
-    sql_on: ${article_pageview_events.segments} = ${segmententry_events.properties__segment_number} ;;
-    relationship: many_to_many
+explore: segment_entry_and_exit_events {
+  always_filter: {
+    filters: {
+      field: segment_entry_and_exit_events.partition_date
+      value: "7 Days"
+    }
   }
 }
-
-explore: segment_entry_and_exit_events {}
 
 explore: segmententry_events {
   label: "Segment Entry Events"
   view_label: "Segment Entry Events"
+  always_filter: {
+    filters: {
+      field: partition_date
+      value: "7 days"
+    }
+  }
+  join: segments {
+    sql: LEFT JOIN UNNEST(${segmententry_events.segments}) as segments ;;
+    relationship: one_to_many
+  }
 }
 
 explore:  segment_overlap {
@@ -66,10 +69,7 @@ explore:  segment_overlap {
       value: "7 days"
     }
   }
-
-  }
-
-explore: segmentexit_events {}
+}
 
 explore: rtabid_events {
   label: "RTA Bid Events"
@@ -83,5 +83,20 @@ explore: rtabid_events {
   join: advertiser_facts {
     sql_on: ${rtabid_events.properties_advertiser} = ${advertiser_facts.advertiser} ;;
     relationship: many_to_one
+  }
+}
+
+explore: article_pageview_events {
+
+  join: pageviewengagement_events {
+    view_label: "Pageview Engagement Events"
+    sql_on: ${article_pageview_events.properties_visit_id} = ${pageviewengagement_events.properties_visit_id};;
+    relationship: one_to_many
+#     type: inner
+  }
+  join: segmententry_events {
+    view_label: "Segment Entry Events"
+    sql_on: ${article_pageview_events.segments} = ${segmententry_events.properties__segment_number} ;;
+    relationship: many_to_many
   }
 }

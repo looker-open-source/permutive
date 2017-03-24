@@ -1,7 +1,7 @@
 view: segments {
 
   dimension: segments {
-    view_label: "Pageview Engagement Events"
+    view_label: "Segments"
     label: "Segment Number"
     type: number
     sql: ${TABLE} ;;

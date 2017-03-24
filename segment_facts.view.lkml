@@ -20,6 +20,7 @@ view: segment_facts {
 
   dimension: segment_name {
     type: string
+    view_label: "Segments"
     sql: ${TABLE}.name ;;
   }
 

@@ -11,7 +11,7 @@
 
   - name: date_filter
     type: date_filter
-    default_value: '30 days'
+    default_value: '7 days'
 
 
   - name: segment_name_filter
@@ -40,7 +40,7 @@
       filters:
         segment_entry_and_exit_events.segment_growth_uniques: ">=0"
       listen:
-        date_filter: segment_entry_and_exit_events.event_date
+        date_filter: segment_entry_and_exit_events.partition_date
         segment_name_filter: segment_entry_and_exit_events.properties_segment_name
       dynamic_fields:
       - table_calculation: cumulative_segment_growth
