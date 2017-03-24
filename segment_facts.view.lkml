@@ -14,6 +14,7 @@ view: segment_facts {
 
   dimension: properties_segment_number {
     type: number
+    hidden: yes
     sql: ${TABLE}.properties_segment_number ;;
   }
 

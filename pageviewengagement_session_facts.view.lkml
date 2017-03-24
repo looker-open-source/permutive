@@ -18,11 +18,13 @@ view: pageviewengagement_session_facts {
 
   dimension: session_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.session_id ;;
   }
 
   dimension: segments {
     type: number
+    hidden:  yes
     sql: ${TABLE}.segments ;;
   }
 
@@ -48,9 +50,5 @@ view: pageviewengagement_session_facts {
     sql: ${pageviews} ;;
     style: integer
     tiers: [1,2,3,4,5]
-  }
-
-  set: detail {
-    fields: [session_id, segments, engaged_time]
   }
 }

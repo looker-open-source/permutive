@@ -31,7 +31,7 @@ explore: pageviewengagement_events
     relationship: one_to_many
   }
   join: pageviewengagement_session_facts {
-    view_label: "Pageview Engagement Session Facts"
+    view_label: "Sessions"
     sql_on: ${pageviewengagement_events.session_id} = ${pageviewengagement_session_facts.session_id} and
       ${segments.segments} = ${pageviewengagement_session_facts.segments};;
     relationship: many_to_one
