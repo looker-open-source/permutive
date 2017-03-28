@@ -14,6 +14,9 @@
   - elements: [top_bidders]
     height: 300
 
+  - elements: [domain_metrics]
+    height: 500
+
 
   filters:
 
@@ -437,3 +440,46 @@
       series_types: {}
       series_labels:
         rtabid_events.properties_advertiser: Advertiser
+
+    - name: domain_metrics
+      title: Domain Metrics
+      type: looker_column
+      model: permutive
+      explore: rtabid_events
+      dimensions: [rtabid_events.properties__client__domain]
+      measures: [rtabid_events.bid_volume, rtabid_events.average_price, rtabid_events.total_bids]
+      listen:
+        date_filter: rtabid_events.partition_date
+        format: rtabid_events.properties__format
+      sorts: [rtabid_events.bid_volume desc]
+      limit: '500'
+      column_limit: '50'
+      query_timezone: America/Los_Angeles
+      stacking: ''
+      show_value_labels: false
+      label_density: 25
+      legend_position: center
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      limit_displayed_rows: false
+      y_axis_combined: false
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      x_axis_scale: auto
+      y_axis_scale_mode: linear
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      show_null_points: true
+      point_style: circle
+      series_types: {}
+      hidden_fields:
+      hide_legend: false
+      y_axis_orientation: [left, right, right]
