@@ -72,21 +72,6 @@ explore:  segment_overlap {
   }
 }
 
-explore: rtabid_events {
-  label: "RTA Bid Events"
-  view_label: "RTA Bid Events"
-  always_filter: {
-    filters: {
-      field: partition_date
-      value: "7 days"
-    }
-  }
-  join: advertiser_facts {
-    sql_on: ${rtabid_events.properties_advertiser} = ${advertiser_facts.advertiser} ;;
-    relationship: many_to_one
-  }
-}
-
 explore: article_pageview_events {
 
   join: pageviewengagement_events {
