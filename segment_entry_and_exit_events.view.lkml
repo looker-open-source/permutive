@@ -28,6 +28,20 @@ view: segment_entry_and_exit_events {
     sql: ${TABLE}.time ;;
   }
 
+  filter: date_group {
+    suggestions: ["Date", "Week", "Month", "Hour"]
+  }
+
+  dimension: dynamic_date_group {
+    sql:  CASE
+        WHEN {% parameter date_group %} = 'Date' THEN cast(${event_date} as string)
+        WHEN {% parameter date_group %} = 'Week' THEN ${event_week}
+        WHEN {% parameter date_group %} = 'Month' THEN ${event_month}
+        WHEN {% parameter date_group %} = 'Hour' THEN ${event_hour}
+        END ;;
+  }
+
+
   filter: partition_date {
     type: date
   }
@@ -51,7 +65,7 @@ view: segment_entry_and_exit_events {
   dimension: segments {
     type: number
     label: "Segment Number"
-    sql: ${TABLE}.segments ;;
+    sql: ${TABLE}.segments_segments ;;
   }
 
   dimension: event_type {

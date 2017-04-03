@@ -33,15 +33,16 @@
       type: looker_line
       model: permutive
       explore: segment_entry_and_exit_events
-      dimensions: [segment_entry_and_exit_events.event_date, segment_entry_and_exit_events.properties_segment_name]
+      dimensions: [segment_entry_and_exit_events.dynamic_date_group, segment_entry_and_exit_events.properties_segment_name]
       pivots: [segment_entry_and_exit_events.properties_segment_name]
-      fill_fields: [segment_entry_and_exit_events.event_date]
+#       fill_fields: [segment_entry_and_exit_events.event_date]
       measures: [segment_entry_and_exit_events.segment_growth_uniques]
       filters:
         segment_entry_and_exit_events.segment_growth_uniques: ">=0"
       listen:
         date_filter: segment_entry_and_exit_events.partition_date
         segment_name_filter: segment_entry_and_exit_events.properties_segment_name
+        date_group: segment_entry_and_exit_events.date_group
       dynamic_fields:
       - table_calculation: cumulative_segment_growth
         label: Cumulative Segment Growth
