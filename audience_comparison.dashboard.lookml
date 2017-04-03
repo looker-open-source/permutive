@@ -212,7 +212,7 @@
       title_text: Session Length
 
     - name: avg_engaged_time
-      title: Average Engaged Time per Session by Segment
+      title: Average session Length
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
@@ -257,7 +257,7 @@
       label_color: [black]
 
     - name: length_percentage
-      title: Percent of Sessions by Length and Segment
+      title: Session Length
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
@@ -308,7 +308,7 @@
       series_types: {}
 
     - name: session_length_grouped
-      title: Sessions by Length and Segment
+      title: Sessions Length
       type: looker_column
       model: permutive
       explore: pageviewengagement_events
@@ -364,7 +364,7 @@
       title_text: Pageviews
 
     - name: avg_pageviews_per_sessions_segment
-      title: Average Pageviews per Session by Segment
+      title: Average Pageviews per Session
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
@@ -403,7 +403,7 @@
       label_color: [black]
 
     - name: percent_sessions_pgviews
-      title: Percent of Sessions by Pageviews and Segment
+      title: Pageviews per Session
       type: looker_bar
       model: permutive
       explore: pageviewengagement_events
@@ -444,7 +444,7 @@
       series_types: {}
 
     - name: sessions_pageviews_segment
-      title: Sessions by Pageviews and Segment
+      title: Pageviews per Session
       type: looker_column
       model: permutive
       explore: pageviewengagement_events
