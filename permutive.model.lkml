@@ -72,6 +72,19 @@ explore:  segment_overlap {
   }
 }
 
+explore: prebid_bid_events {
+  always_filter: {
+    filters: {
+      field: partition_date
+      value: "7 days"
+    }
+  }
+  join: bidder_facts {
+    sql_on: ${prebid_bid_events.bidder} = ${bidder_facts.bidder} ;;
+    relationship: many_to_one
+  }
+}
+
 explore: article_pageview_events {
 
   join: pageviewengagement_events {
